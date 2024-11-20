@@ -8,7 +8,7 @@ namespace PasswordHashing.Services
 {
     public class UserService : IUserService
     {
-        /*
+
         private readonly IRepository<User> _userRepository;
 
         public UserService(IRepository<User> userRepository)
@@ -26,7 +26,7 @@ namespace PasswordHashing.Services
                 throw new UserAlreadyExistException("Username already exists");
             }
 
-            //hash password using bcrypt
+            //hashing password using bcrypt
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
             var user = new User
             {
@@ -49,59 +49,6 @@ namespace PasswordHashing.Services
             }
 
             //here we are doing like verifying password with hash stored in database
-            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(loginDto.Password, user.PasswordHash);
-            if (!isPasswordValid)
-            {
-                throw new UserNotFoundException("Invalid credentials");
-            }
-        }
-        */
-
-
-
-
-        private readonly IRepository<User> _userRepository;
-        private readonly IMapper _mapper;
-
-        public UserService(IRepository<User> userRepository, IMapper mapper)
-        {
-            _userRepository = userRepository;
-            _mapper = mapper;
-        }
-
-        // Register a user by hashing the password and saving the user to the database
-        public void Register(UserDto userDto)
-        {
-            // Check if user already exists
-            var existingUser = _userRepository.GetAll().FirstOrDefault(u => u.UserName == userDto.UserName);
-            if (existingUser != null)
-            {
-                throw new UserAlreadyExistException("Username already exists");
-            }
-
-            // Hash password using bcrypt
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
-
-            // Use AutoMapper to map UserDto to User
-            var user = _mapper.Map<User>(userDto);
-            user.Id = Guid.NewGuid(); // Assign a new GUID
-            user.PasswordHash = hashedPassword;
-
-            // Save to database
-            _userRepository.Add(user);
-            _userRepository.Save();
-        }
-
-        // Login a user by verifying the password against the stored hash
-        public void Login(LoginDto loginDto)
-        {
-            var user = _userRepository.GetAll().FirstOrDefault(u => u.UserName == loginDto.UserName);
-            if (user == null)
-            {
-                throw new UserNotFoundException("Invalid credentials means no user found");
-            }
-
-            // Verify password with stored hash
             bool isPasswordValid = BCrypt.Net.BCrypt.Verify(loginDto.Password, user.PasswordHash);
             if (!isPasswordValid)
             {

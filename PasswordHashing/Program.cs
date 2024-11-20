@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PasswordHashing.Data;
 using PasswordHashing.Exceptions;
-using PasswordHashing.Mappers;
 using PasswordHashing.Repositories;
 using PasswordHashing.Services;
 
@@ -14,8 +13,6 @@ namespace PasswordHashing
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             // Add services to the container.
             builder.Services.AddDbContext<PasswordDbContext>(options =>

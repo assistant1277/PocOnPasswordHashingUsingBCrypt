@@ -12,7 +12,7 @@ namespace PasswordHashing.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        /*
+        
         private readonly IUserService _userService;
 
         public UserController(IUserService userService)
@@ -44,49 +44,6 @@ namespace PasswordHashing.Controllers
                     .Select(e => e.ErrorMessage));
                 throw new ValidationException($"{errors}");
             }
-            _userService.Login(loginDto);
-            return Ok("Login successful");
-        }
-        */
-
-        private readonly IUserService _userService;
-        private readonly IMapper _mapper;
-
-        public UserController(IUserService userService, IMapper mapper)
-        {
-            _userService = userService;
-            _mapper = mapper;
-        }
-
-        [HttpPost("register")]
-        public IActionResult Register(UserDto userDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                var errors = string.Join(";", ModelState.Values
-                    .SelectMany(v => v.Errors)
-                    .Select(e => e.ErrorMessage));
-                throw new ValidationException($"{errors}");
-            }
-
-            // Use AutoMapper to map UserDto to User if necessary
-            var user = _mapper.Map<User>(userDto);
-
-            _userService.Register(userDto);
-            return Ok("User has registered successfully");
-        }
-
-        [HttpPost("login")]
-        public IActionResult Login(LoginDto loginDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                var errors = string.Join(";", ModelState.Values
-                    .SelectMany(v => v.Errors)
-                    .Select(e => e.ErrorMessage));
-                throw new ValidationException($"{errors}");
-            }
-
             _userService.Login(loginDto);
             return Ok("Login successful");
         }
