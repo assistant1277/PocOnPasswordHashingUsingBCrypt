@@ -27,7 +27,7 @@ namespace PasswordHashing.Repositories
 
         public void Save()
         {
-            _context.SaveChanges(); 
+            _context.SaveChanges();
         }
     }
 }

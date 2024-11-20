@@ -8,14 +8,14 @@ namespace PasswordHashing.Models
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Username is required")]
-        [StringLength(25, ErrorMessage = "Username length should not be more than 20 characters")]
+        [StringLength(20, ErrorMessage = "Username length should not be more than 20 characters")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "PasswordHash is required")]
         public string PasswordHash { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address email should be in correct format")]
+        [EmailAddress(ErrorMessage = "Invalid Email address email should be in correct format")]
         public string Email { get; set; }
     }
 }
