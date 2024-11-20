@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PasswordHashing.Dtos;
-using PasswordHashing.Models;
 using PasswordHashing.Services;
 using System.ComponentModel.DataAnnotations;
 

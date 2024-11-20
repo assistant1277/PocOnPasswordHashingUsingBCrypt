@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using PasswordHashing.Dtos;
+﻿using PasswordHashing.Dtos;
 using PasswordHashing.Exceptions;
 using PasswordHashing.Models;
 using PasswordHashing.Repositories;
